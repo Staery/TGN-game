@@ -1,0 +1,400 @@
+﻿<Window x:Class="TGN.UpgradeForm" FontFamily="Kristen ITC"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Storgrade" Height="353" Width="678.244" Closing="Closing_Form" Loaded="LoadForm" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="Resources/GameIcon.ico">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+            <GradientStop Color="#FF2FA67E" Offset="1"/>
+            <GradientStop Color="#FF2D9976" Offset="0.429"/>
+            <GradientStop Color="#FF5D8F7E"/>
+            <GradientStop Color="#FF42B88D" Offset="0.219"/>
+            <GradientStop Color="#FF18B47F" Offset="0.599"/>
+            <GradientStop Color="#FF229771" Offset="0.784"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Grid>
+
+        <Border BorderBrush="Black" BorderThickness="4" HorizontalAlignment="Left" Height="145" Margin="10,4,0,0" VerticalAlignment="Top" Width="238" CornerRadius="8"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="75" VerticalAlignment="Top" Width="75" Margin="25,48,0,0">
+            <Image Name="UnitImg"/>
+        </Border>
+        <Label x:Name="UnitNumLb" HorizontalContentAlignment="Center" Content="Goose Num" Width="238" Margin="10,16,0,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="Atk:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="114,48,0,0" Width="38"/>
+        <Label Content="Spd: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="111,73,0,0" Width="41"/>
+        <Label Content="Profit: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,98,0,0" Width="61"/>
+        <Label x:Name="LbAtkG" Content="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="152,48,0,0" Width="96"/>
+        <Label x:Name="LbSpdG" Content="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="152,73,0,0" Width="96"/>
+        <Label x:Name="LbProfitG" Content="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="152,98,0,0" Width="96"/>
+
+
+        <Border BorderBrush="Black" BorderThickness="4" HorizontalAlignment="Left" Height="145" Margin="255,4,0,0" VerticalAlignment="Top" Width="148" CornerRadius="8"></Border>
+        <Button Name="GooseRuneAtk" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" Click="SelectedUnitRune_click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="44"  Margin="272,32,0,0" Height="42">
+            <Image Name="ImgGRune1" Height="41" Width="44"/>
+        </Button>
+        <Button Name="GooseRuneSpd" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" Click="SelectedUnitRune_click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="44"  Margin="305,85,0,0" Height="42">
+            <Image Name="ImgGRune0" Height="41" Width="44"/>
+        </Button>
+        <Button Name="GooseRuneProfit" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" Click="SelectedUnitRune_click"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="44"  Margin="338,32,0,0" Height="42">
+            <Image Name="ImgGRune2" Height="41" Width="44"/>
+        </Button>
+
+
+        <Border BorderBrush="Black" BorderThickness="4" HorizontalAlignment="Left" Height="145" VerticalAlignment="Top" Width="248" Margin="412,4,0,0" CornerRadius="8">
+            <TextBox x:Name="UpgradeRuneTb" TextWrapping="Wrap" Margin="75,87,73,26" UndoLimit="5" Foreground="Black" Text="0" KeyUp="UpgradeRuneTb_KeyUp" FontSize="14"/>
+        </Border>
+        <Label x:Name="LbRuneName" Content="Type Runa +0" HorizontalContentAlignment="Center" VerticalAlignment="Top" Margin="417,3,14,0"/>
+        <Label  Name="LbRuneMainStat" Content="MainStats: NaN" VerticalAlignment="Top" Margin="440,45,10,0"/>
+        <Label  Name="LbRuneQuality" Content="Quality: NaN" VerticalAlignment="Top" Margin="440,28,3,0"/>
+        <Button Content="Upgrade" HorizontalAlignment="Left" VerticalAlignment="Top" Width="61" Margin="588,98,0,0" Click="UpgradeRune_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.187"/>
+                    <GradientStop Color="#FF747474" Offset="0.617"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Sell" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Margin="419,71,0,0" Click="SellRune_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.187"/>
+                    <GradientStop Color="#FF747474" Offset="0.617"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Equip" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Margin="419,118,0,0" Click="EquipRune_Click" Height="19">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.219"/>
+                    <GradientStop Color="#FF959595" Offset="0.579"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="UnEquip" HorizontalAlignment="Left" VerticalAlignment="Top" Width="64" Margin="419,96,0,0" Click="UnEquipRune_Click" Height="19">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.245"/>
+                    <GradientStop Color="#FF939393" Offset="0.611"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Label  Content="Cost: " VerticalAlignment="Top" Margin="483,67,142,0"/>
+        <Label  Name="LbRuneSellCost" Content="NaN" VerticalAlignment="Top" Margin="530,67,23,0"/>
+        <Label  Name="RuneUpCostLb" Content="Cost: 0" VerticalAlignment="Top" Margin="483,115,23,0"/>
+
+
+        <Border BorderBrush="Black" BorderThickness="4" HorizontalAlignment="Left" Height="158" VerticalAlignment="Top" Width="650" Margin="10,154,0,0" CornerRadius="8">
+            <ScrollViewer Margin="2,6,4,5" RenderTransformOrigin="0.5,0.5" VerticalScrollBarVisibility ="Hidden" HorizontalScrollBarVisibility ="Visible"  Padding="1,5,5,5">
+                <StackPanel Button.Click="SelectedRune_Click" Height="108" Width="2750" RenderTransformOrigin="0.5,0.5">
+                    <Button x:Name="Rune0" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="5,0,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune0" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune1" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="5,5,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune1" Height="45" Width="45"/>
+                    </Button>
+
+                    <Button x:Name="Rune2" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="60,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune2" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune3"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="60,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune3" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune4" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="115,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune4" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune5"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="115,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune5" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune6" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="170,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune6" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune7"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="170,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune7" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune8" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="225,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune8" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune9"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="225,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune9" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune10" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="280,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune10" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune11"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="280,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune11" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune12" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="335,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune12" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune13"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="335,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune13" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune14" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="390,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune14" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune15"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="390,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune15" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune16" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="445,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune16" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune17"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="445,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune17" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune18" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="500,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune18" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune19"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="500,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune19" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune20" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="555,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune20" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune21"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="555,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune21" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune22" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="610,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune22" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune23"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="610,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune23" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune24" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="665,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune24" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune25"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="665,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune25" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune26" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="720,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune26" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune27"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="720,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune27" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune28" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="775,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune28" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune29"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="775,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune29" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune30" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="830,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune30" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune31"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="830,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune31" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune32" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="885,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune32" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune33"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="885,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune33" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune34" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="940,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune34" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune35"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="940,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune35" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune36" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="995,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune36" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune37"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="995,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune37" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune38" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1050,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune38" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune39"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1050,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune39" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune40" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1105,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune40" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune41"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1105,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune41" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune42" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1160,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune42" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune43"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1160,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune43" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune44" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1215,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune44" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune45"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1215,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune45" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune46" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1270,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune46" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune47"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1270,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune47" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune48" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1325,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune48" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune49"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1325,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune49" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune50" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1380,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune50" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune51"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1380,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune51" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune52" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1435,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune52" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune53"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1435,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune53" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune54" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1490,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune54" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune55"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1490,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune55" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune56" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1545,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune56" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune57"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1545,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune57" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune58" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1600,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune58" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune59"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1600,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune59" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune60" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1655,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune60" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune61"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1655,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune61" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune62" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1710,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune62" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune63"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1710,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune63" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune64" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1765,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune64" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune65"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1765,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune65" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune66" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1820,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune66" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune67"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1820,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune67" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune68" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1875,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune68" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune69"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1875,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune69" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune70" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1930,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune70" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune71"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1930,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune71" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune72" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="1985,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune72" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune73"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="1985,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune73" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune74" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="2040,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune74" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune75"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="2040,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune75" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune76" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="2095,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune76" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune77"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="2095,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune77" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune78" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="2150,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune78" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune79"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="2150,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune79" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune80" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="2205,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune80" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune81"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="2205,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune81" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune82" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="2260,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune82" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune83"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="2260,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune83" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune84" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="2315,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune84" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune85"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="2315,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune85" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune86" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="2370,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune86" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune87"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="2370,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune87" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune88" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="2425,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune88" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune89"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="2425,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune89" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune90" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="2480,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune90" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune91"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="2480,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune91" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune92" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="2535,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune92" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune93"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="2535,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune93" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune94" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="2590,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune94" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune95"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="2590,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune95" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune96" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="2645,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune96" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune97"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="2645,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune97" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune98" MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True" Margin="2700,-47,0,0"   VerticalAlignment="Top">
+                        <Image Name="ImgRune98" Height="45" Width="45"/>
+                    </Button>
+                    <Button x:Name="Rune99"  MouseDown="Btns_MouseDown" AllowDrop="True" Drop="Btns_Drop" HorizontalContentAlignment="Left"  HorizontalAlignment="Left"  MinHeight="47" MaxHeight="47" MinWidth="47" MaxWidth="47" ScrollViewer.CanContentScroll="True"  Margin="2700,-99,0,0"  VerticalAlignment="Top">
+                        <Image Name="ImgRune99" Height="45" Width="45"/>
+                    </Button>
+
+
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Window>
